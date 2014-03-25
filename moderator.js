@@ -24,8 +24,7 @@ function init(){
         socket.set("transports", ["websocket"]);
         socket.set("log level", 2);
     });
-    board.init(); // Still have to write this function
-    makeMove();
+  //  board.initialize(); // Still have to write this function
     setEventHandlers();
 };
 
@@ -39,18 +38,20 @@ var setEventHandlers = function() {
 function onSocketConnection(client) {
    util.log("New Connection Established: "+client.id);
    client.on("disconnect", onClientDisconnect);
+   sendData(client);
 };
 function onClientDisconnect() {
     util.log("Player has disconnected: "+this.id);
 };
 
+
 /**********************************
 ** MODERATOR - MAKE MOVES
 **********************************/
-function makeMove(){
+function sendData(client){
     setInterval(function(){
-        var boardData = JSON.stringify(board.tiles);
-        this.emit("makeMove", boardData);
+      //  var boardData = JSON.stringify(board.tiles);
+        client.emit("makeMove", {x:"hello"});
     },1000);
 };
 

@@ -15,9 +15,9 @@ var Board = function(rows, columns){
         return arr;
     }
 
-    var init = function(){
-    
-    };
+//    var initialize = function(){
+         
+//    };
 
     var update = function(arr){
         for(var i=0;i<rows;i++){
@@ -29,6 +29,7 @@ var Board = function(rows, columns){
 
     return{
         update: update
-        init: init
+        //initialize: initialize
     }
 };
+exports.Board = Board;

@@ -11,7 +11,7 @@ var rows = 30,
     columns = 60,
     tileWidth,
     tileHeight;
-
+var socket;
 
 /*************************
 **  Game Initialization
@@ -30,7 +30,7 @@ function init(){
     tileHeight = fieldHeight / rows;
    
     // Initialize Socket Connection
-    socket = io.connect("http://10.1.39.111", {port: 8000,     transports: ["websocket"]});
+    socket = io.connect("http://127.0.0.1", {port: 8000,transports: ["websocket"]});
     // Start listening for events
     setEventHandlers();
 };
@@ -41,9 +41,17 @@ function init(){
 ********************************/
 var setEventHandlers = function(){
     // Window resize
-    window.addEventListener("resize", onResize, false);    
+    window.addEventListener("resize", onResize, false);
+    socket.on("connect", onSocketConnected);
+    socket.on("makeMove", onmakeMove);
 };
-
+function onSocketConnected(){
+    console.log("connected");
+};
+// Make Move - Update Board
+function onmakeMove(data){
+        console.log(data.x);
+};
 // Browser window resize
 function onResize(e){
     // Set canvas width and height on window resize
