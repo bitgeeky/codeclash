@@ -15,6 +15,10 @@ var Board = function(rows, columns){
         return arr;
     }
 
+    var init = function(){
+    
+    };
+
     var update = function(arr){
         for(var i=0;i<rows;i++){
             for(var j=0;j<cols;j++){
@@ -25,5 +29,6 @@ var Board = function(rows, columns){
 
     return{
         update: update
+        init: init
     }
 };
