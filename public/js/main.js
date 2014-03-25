@@ -1,7 +1,17 @@
+/***********************************
+** GAME VARIABLES
+***********************************/
 var canvas,
     ctx,
-    fieldwidth,
-    fieldheight;
+    fieldWidth,
+    fieldHeight;
+
+// Field Division
+var rows = 20,
+    columns = 40,
+    tileWidth,
+    tileHeight;
+
 
 /*************************
 **  Game Initialization
@@ -12,9 +22,13 @@ function init(){
     ctx = canvas.getContext("2d");
 
     // Set canvas width and height
-    canvas.width = fieldwidth = window.innerWidth;
-    canvas.height = fieldheight = window.innerHeight;
+    canvas.width = fieldWidth = window.innerWidth;
+    canvas.height = fieldHeight = window.innerHeight;
 
+    //Set tile width and height
+    tileWidth = fieldWidth / columns;
+    tileHeight = fieldHeight / rows;
+    
     // Start listening for events
     setEventHandlers();
 };
@@ -31,8 +45,12 @@ var setEventHandlers = function(){
 // Browser window resize
 function onResize(e){
     // Set canvas width and height on window resize
-    canvas.width = fieldwidth = window.innerWidth;
-    canvas.height = fieldheight = window.innerHeight;
+    canvas.width = fieldWidth = window.innerWidth;
+    canvas.height = fieldHeight = window.innerHeight;
+    
+    //Set tile width and height on window resize
+    tileWidth = fieldWidth / columns;
+    tileHeight = fieldHeight / rows;
 };
 
 
@@ -52,5 +70,24 @@ function animate(){
 ** Game Draw
 ******************************/
 function draw(){
-    
-}
+   
+   ctx.strokeStyle = '#000';
+   ctx.clearRect(0, 0, fieldWidth, fieldHeight);
+   ctx.beginPath();
+   
+   // Draw Grid
+
+   // Horizontal Lines
+   for(var x = 0; x < columns; x++) {
+       ctx.moveTo(x * tileWidth, 0);
+       ctx.lineTo(x * tileWidth, fieldHeight);
+   }
+   // Vertical Lines
+   for(var y = 0; y < rows; y++) {
+       ctx.moveTo(0, y * tileHeight);
+       ctx.lineTo(fieldWidth, y * tileHeight);
+   }
+   
+   ctx.stroke();
+
+};
