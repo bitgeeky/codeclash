@@ -7,8 +7,8 @@ var canvas,
     fieldHeight;
 
 // Field Division
-var rows = 20,
-    columns = 40,
+var rows = 30,
+    columns = 60,
     tileWidth,
     tileHeight;
 
@@ -25,10 +25,12 @@ function init(){
     canvas.width = fieldWidth = window.innerWidth;
     canvas.height = fieldHeight = window.innerHeight;
 
-    //Set tile width and height
+    // Set tile width and height
     tileWidth = fieldWidth / columns;
     tileHeight = fieldHeight / rows;
-    
+   
+    // Initialize Socket Connection
+    socket = io.connect("http://10.1.39.111", {port: 8000,     transports: ["websocket"]});
     // Start listening for events
     setEventHandlers();
 };
