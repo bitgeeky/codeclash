@@ -50,7 +50,7 @@ function onSocketConnected(){
 };
 // Make Move - Update Board
 function onmakeMove(data){
-        console.log(data.x);
+        console.log(data);
 };
 // Browser window resize
 function onResize(e){

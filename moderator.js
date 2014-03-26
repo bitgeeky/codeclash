@@ -24,7 +24,7 @@ function init(){
         socket.set("transports", ["websocket"]);
         socket.set("log level", 2);
     });
-  //  board.initialize(); // Still have to write this function
+    board.initialSetup(); // Still have to write this function
     setEventHandlers();
 };
 
@@ -50,9 +50,9 @@ function onClientDisconnect() {
 **********************************/
 function sendData(client){
     setInterval(function(){
-      //  var boardData = JSON.stringify(board.tiles);
-        client.emit("makeMove", {x:"hello"});
-    },1000);
+        var boardData = JSON.stringify(board.getTiles());
+        client.emit("makeMove", boardData);
+    },2000);
 };
 
 init();
