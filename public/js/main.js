@@ -57,6 +57,7 @@ function onSocketConnected(){
 // Make Move - Update Board
 function onmakeMove(data){
     var tiles = JSON.parse(data);
+    console.log(tiles);
     board.update(tiles);
     clientBoard = board.getTiles();
 };
@@ -110,8 +111,11 @@ function draw(){
    if(clientBoard){
        for(var x = 0; x < rows; x++) {
        for(var y = 0; y < columns; y++) {
-           if(clientBoard[x][y] === "GR"){
+           if(clientBoard[x][y] == "GR"){
                ctx.fillStyle = '#009900';
+           }
+           else{
+               ctx.fillStyle = '#FFF';
            }
            ctx.fillRect(y * tileWidth,
                    x * tileHeight,

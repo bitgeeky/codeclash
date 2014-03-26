@@ -15,6 +15,16 @@ var ConfOne = function(r, c){
     
     
     var walls = [];
+    
+    return{
+        numPlayers: numPlayers,
+        numAssets: numAssets,
+        redTanks: redTanks,
+        redAssests: redAssests,
+        blueTanks: blueTanks,
+        blueAssests: blueAssests,
+        walls: walls
+    }
 };
 
 exports.ConfOne = ConfOne;

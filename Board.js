@@ -16,12 +16,20 @@ var Board = function(rows, columns){
     var tiles;
 
 
-    var initialSetup = function(){
+    var initialSetup = function(config){
         tiles = Create2DArray(rows, cols);
         for(var i=0;i<rows;i++){
             for(var j=0;j<cols;j++){
                tiles[i][j] = "GR"; 
             }
+        }
+        var tmp = config.redTanks;
+        for(var i=0;i<tmp.length;i++){
+            tiles[tmp[i][0]][tmp[i][1]]="RT";
+        }
+        tmp = config.blueTanks;
+        for(var i=0;i<tmp.length;i++){
+            tiles[tmp[i][0]][tmp[i][1]]="BT";
         }
     };
 
