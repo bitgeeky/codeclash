@@ -18,6 +18,11 @@ var Board = function(rows, columns){
 
     var initialSetup = function(){
         tiles = Create2DArray(rows, cols);
+        for(var i=0;i<rows;i++){
+            for(var j=0;j<cols;j++){
+               tiles[i][j] = "GR"; 
+            }
+        }
     };
 
     var update = function(arr){

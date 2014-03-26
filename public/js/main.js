@@ -11,6 +11,7 @@ var rows = 30,
     tileWidth,
     tileHeight,
     board;
+var clientBoard;
 var socket;
 
 
@@ -57,8 +58,7 @@ function onSocketConnected(){
 function onmakeMove(data){
     var tiles = JSON.parse(data);
     board.update(tiles);
-    var arr = board.getTiles();
-    console.log(arr[0][0]);
+    clientBoard = board.getTiles();
 };
 // Browser window resize
 function onResize(e){
@@ -104,8 +104,22 @@ function draw(){
    for(var y = 0; y < rows; y++) {
        ctx.moveTo(0, y * tileHeight);
        ctx.lineTo(fieldWidth, y * tileHeight);
+   } 
+   
+   // Fill Tiles
+   if(clientBoard){
+       for(var x = 0; x < rows; x++) {
+       for(var y = 0; y < columns; y++) {
+           if(clientBoard[x][y] === "GR"){
+               ctx.fillStyle = '#f70';
+           }
+           ctx.fillRect(y * tileWidth,
+                   x * tileHeight,
+                   tileWidth, tileHeight);
+       }
+   }
    }
    
+   // Show Grid
    ctx.stroke();
-
 };
