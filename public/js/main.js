@@ -50,7 +50,8 @@ function onSocketConnected(){
 };
 // Make Move - Update Board
 function onmakeMove(data){
-        console.log(data);
+    var board = JSON.parse(data);
+        console.log(board[0][0]);
 };
 // Browser window resize
 function onResize(e){
