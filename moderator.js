@@ -52,7 +52,7 @@ function sendData(client){
     setInterval(function(){
         var boardData = JSON.stringify(board.getTiles());
         client.emit("makeMove", boardData);
-    },2000);
+    },1000);
 };
 
 init();

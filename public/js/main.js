@@ -111,7 +111,7 @@ function draw(){
        for(var x = 0; x < rows; x++) {
        for(var y = 0; y < columns; y++) {
            if(clientBoard[x][y] === "GR"){
-               ctx.fillStyle = '#f70';
+               ctx.fillStyle = '#009900';
            }
            ctx.fillRect(y * tileWidth,
                    x * tileHeight,
