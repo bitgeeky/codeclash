@@ -5,13 +5,14 @@ var canvas,
     ctx,
     fieldWidth,
     fieldHeight;
-
 // Field Division
 var rows = 30,
     columns = 60,
     tileWidth,
-    tileHeight;
+    tileHeight,
+    board;
 var socket;
+
 
 /*************************
 **  Game Initialization
@@ -20,11 +21,15 @@ function init(){
     // Declare canvas and rendering context
     canvas = document.getElementById("battleField");
     ctx = canvas.getContext("2d");
+    
+    // Initialize Board
+    board = new Board(rows, columns);
+    board.initialSetup();
 
     // Set canvas width and height
     canvas.width = fieldWidth = window.innerWidth;
     canvas.height = fieldHeight = window.innerHeight;
-
+    
     // Set tile width and height
     tileWidth = fieldWidth / columns;
     tileHeight = fieldHeight / rows;
@@ -50,8 +55,10 @@ function onSocketConnected(){
 };
 // Make Move - Update Board
 function onmakeMove(data){
-    var board = JSON.parse(data);
-        console.log(board[0][0]);
+    var tiles = JSON.parse(data);
+    board.update(tiles);
+    var arr = board.getTiles();
+    console.log(arr[0][0]);
 };
 // Browser window resize
 function onResize(e){

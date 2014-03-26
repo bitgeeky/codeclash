@@ -3,10 +3,6 @@
 *****************************/
 var Board = function(rows, columns){
     
-    var cols = columns;
-    var rows = rows;
-    var tiles = Create2DArray(rows, cols);
-
     function Create2DArray(r,c) {
         var arr = Array(r);
         for (var i=0;i<r;i++) {
@@ -14,6 +10,15 @@ var Board = function(rows, columns){
         }
         return arr;
     }
+    
+    var cols = columns;
+    var rows = rows;
+    var tiles;
+
+
+    var initialSetup = function(){
+        tiles = Create2DArray(rows, cols);
+    };
 
     var update = function(arr){
         for(var i=0;i<rows;i++){
@@ -22,8 +27,14 @@ var Board = function(rows, columns){
             }
         }
     };
-
+    
+    var getTiles = function(){
+        return tiles;
+    }
+    
     return{
-        update: update
+        update: update,
+        initialSetup: initialSetup,
+        getTiles: getTiles
     }
 };
