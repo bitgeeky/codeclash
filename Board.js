@@ -39,6 +39,10 @@ var Board = function(rows, columns){
         for(var i=0;i<tmp.length;i++){
             tiles[tmp[i][0]][tmp[i][1]]="BA";
         }
+        tmp = config.walls;
+        for(var i=0;i<tmp.length;i++){
+            tiles[tmp[i][0]][tmp[i][1]]="WA";
+        }
     };
 
     var update = function(arr){

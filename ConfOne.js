@@ -15,6 +15,19 @@ var ConfOne = function(r, c){
     
     
     var walls = [];
+    createWalls();
+    function createWalls(){
+        for(var i=5;i<r-5;i++){
+            walls.push([i,c/4]);
+            walls.push([i,c/4+1]);
+            walls.push([i,3*c/4]);
+            walls.push([i,3*c/4-1]);
+        }
+        for(var i=(c/4+4);i<(3*c/4-4);i++){
+            walls.push([r/2-1,i]);
+            walls.push([r/2,i]);
+        }
+    }
     
     return{
         numPlayers: numPlayers,
