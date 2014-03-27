@@ -2,12 +2,12 @@ var helperFunctions = function(){
     var validateMove = function(move, color){
     
     };
-    var updateBoard = function(tiles, move){
-    
+    var makeMove = function(tiles, move){
+        // Return a 2d array updating the board state
     };
     return{
         validateMove: validateMove,
-        updateBoard: updateBoard
+        makeMove: makeMove
     }
 };
 exports.helperFunctions = helperFunctions;
