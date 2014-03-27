@@ -11,9 +11,9 @@ var socket;
 ** GAME VARIABLES
 ************************************/
 var Board = require("./Board").Board;
-var board = new Board(30, 60);
+var board = new Board(20, 40);
 var ConfOne = require("./ConfOne").ConfOne;
-var config = new ConfOne(30, 60)
+var config = new ConfOne(20, 40)
 
 
 /************************************

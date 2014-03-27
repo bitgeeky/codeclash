@@ -6,8 +6,8 @@ var canvas,
     fieldWidth,
     fieldHeight;
 // Field Division
-var rows = 30,
-    columns = 60,
+var rows = 20,
+    columns = 40,
     tileWidth,
     tileHeight,
     board;
@@ -57,7 +57,6 @@ function onSocketConnected(){
 // Make Move - Update Board
 function onmakeMove(data){
     var tiles = JSON.parse(data);
-    console.log(tiles);
     board.update(tiles);
     clientBoard = board.getTiles();
 };

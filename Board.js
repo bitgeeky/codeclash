@@ -27,9 +27,17 @@ var Board = function(rows, columns){
         for(var i=0;i<tmp.length;i++){
             tiles[tmp[i][0]][tmp[i][1]]="RT";
         }
+        tmp = config.redAssets;
+        for(var i=0;i<tmp.length;i++){
+            tiles[tmp[i][0]][tmp[i][1]]="RA";
+        }
         tmp = config.blueTanks;
         for(var i=0;i<tmp.length;i++){
             tiles[tmp[i][0]][tmp[i][1]]="BT";
+        }
+        tmp = config.blueAssets;
+        for(var i=0;i<tmp.length;i++){
+            tiles[tmp[i][0]][tmp[i][1]]="BA";
         }
     };
 
