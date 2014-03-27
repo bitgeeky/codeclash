@@ -55,7 +55,7 @@ var Board = function(rows, columns){
     
     var getTiles = function(){
         return tiles;
-    }
+    };
     
     return{
         update: update,
