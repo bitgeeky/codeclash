@@ -89,13 +89,14 @@ function animate(){
 ******************************/
 function draw(){
    
-   ctx.strokeStyle = '#000';
-   ctx.clearRect(0, 0, fieldWidth, fieldHeight);
-   ctx.beginPath();
+   //ctx.strokeStyle = '#000';
+   //ctx.clearRect(0, 0, fieldWidth, fieldHeight);
+   //ctx.beginPath();
    
    // Draw Grid
 
    // Horizontal Lines
+   /*
    for(var x = 0; x < columns; x++) {
        ctx.moveTo(x * tileWidth, 0);
        ctx.lineTo(x * tileWidth, fieldHeight);
@@ -105,7 +106,7 @@ function draw(){
        ctx.moveTo(0, y * tileHeight);
        ctx.lineTo(fieldWidth, y * tileHeight);
    } 
-   
+   */
    // Fill Tiles
    if(clientBoard){
        for(var x = 0; x < rows; x++) {
@@ -139,5 +140,5 @@ function draw(){
    }
    
    // Show Grid
-   ctx.stroke();
+   //ctx.stroke();
 };
