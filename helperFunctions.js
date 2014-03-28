@@ -1,12 +1,54 @@
 var helperFunctions = function(){
+    
     var stepRange = 1;
     var fireRange = 3;
-    
 
-    var validateMove = function(tiles, move, color){
-
+    var validateMove = function(tiles, move, playerTank){
+        var initX = move[0],
+            initY = move[1];
+        
+        if(tiles[initX][initY] != playerTank){
+            return 0;
+        }
+        if(move[3] == 1){
+            return 1;
+        }
+        else if(move[3] == 0){
+            if(move[2] == 1){
+                if((initX - stepRange) >= 0){
+                    var tileCode = tiles[initX-stepRange][initY];
+                    if(tileCode == "GR" || tileCode == "FR"){
+                        return 1;
+                    }
+                }
+            }
+            else if(move[2] == -1){
+                if((initX + stepRange) <= tiles.length){
+                    var tileCode = tiles[initX+stepRange][initY];
+                    if(tileCode == "GR" || tileCode == "FR"){
+                        return 1;
+                    }
+                }
+            }
+            else if(move[2] == 2){
+                if((initY + stepRange) <= tiles[0].length){
+                    var tileCode = tiles[initX][initY+stepRange];
+                    if(tileCode == "GR" || tileCode == "FR"){
+                        return 1;
+                    }
+                }
+            }
+            else if(move[2] == -2){
+                if((initY - stepRange) >= 0){
+                    var tileCode = tiles[initX][initY-stepRange];
+                    if(tileCode == "GR" || tileCode == "FR"){
+                        return 1;
+                    }
+                }
+            }
+        }
+        return 0;
     };
-
 
     var makeMove = function(tiles, move){
         
@@ -16,9 +58,9 @@ var helperFunctions = function(){
             initY = move[1];
 
             // Make a Valid Move
-            if(move[3] == 1)
+            if(move[2] == 1)
             {
-                if(move[4] == 0){
+                if(move[3] == 0){
                     // Move towards North
                     tiles[initX][initY+stepRange] = tiles[initX][initY];
                     tiles[initX][initY] = "GR";
@@ -32,9 +74,9 @@ var helperFunctions = function(){
                     }
                 }
             }
-            else if(move[3] == -1)
+            else if(move[2] == -1)
             {
-                if(move[4] == 0){
+                if(move[3] == 0){
                     // Move towards South
                     tiles[initX][initY-stepRange] = tiles[initX][initY];
                     tiles[initX][initY] = "GR";
@@ -48,9 +90,9 @@ var helperFunctions = function(){
                     }
                 }
             }
-            else if(move[3] == 2)
+            else if(move[2] == 2)
             {
-                if(move[4] == 0){
+                if(move[3] == 0){
                     // Move towards East
                     tiles[initX+stepRange][initY] = tiles[initX][initY];
                     tiles[initX][initY] = "GR";
@@ -64,9 +106,9 @@ var helperFunctions = function(){
                     }
                 }
             }
-            else if(move[3] == -2)
+            else if(move[2] == -2)
             {
-                if(move[4] == 0){
+                if(move[3] == 0){
                     // Move towards West
                     tiles[initX-stepRange][initY] = tiles[initX][initY];
                     tiles[initX][initY] = "GR";
