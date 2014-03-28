@@ -113,8 +113,23 @@ function draw(){
            if(clientBoard[x][y] == "GR"){
                ctx.fillStyle = '#009900';
            }
-           else{
-               ctx.fillStyle = '#FFF';
+           else if(clientBoard[x][y] == "FR"){
+               ctx.fillStyle = '#000';
+           }
+           else if(clientBoard[x][y] == "RT"){
+               ctx.fillStyle = '#FF0000';
+           }
+           else if(clientBoard[x][y] == "BT"){
+               ctx.fillStyle = '#0000A0';
+           }
+           else if(clientBoard[x][y] == "RA"){
+               ctx.fillStyle = '#FFA500';
+           }
+           else if(clientBoard[x][y] == "BA"){
+               ctx.fillStyle = '#00FFFF';
+           }
+           else if(clientBoard[x][y] == "WA"){
+               ctx.fillStyle = '#A52A2A';
            }
            ctx.fillRect(y * tileWidth,
                    x * tileHeight,
