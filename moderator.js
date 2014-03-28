@@ -70,18 +70,22 @@ function sendData(client){
 **********************************/
 /****
 function playGame(){
-    var turn = 1;
+    var turn = true;
     setInterval(function(){
         var move;
         if(turn){
-            move = blueBot.makeMove(board.getTiles(),"B");
+            move = blueBot.makeMove(board.getTiles(),"BT");
+            if(help.validateMove(board.getTiles(), move, "BT")){
+                board.update(help.makeMove(board.getTiles(), move));
+            }
         }
         else{
-            move = redBot.makeMove(board.getTiles(),"R");
+            move = redBot.makeMove(board.getTiles(),"RT");
+            if(help.validateMove(board.getTiles(), move, "RT")){
+                board.update(help.makeMove(board.getTiles(), move));
+            }
         }
-        if(help.validateMove(move)){
-            board.update(help.makeMove());
-        }
+        turn = !turn;
     },1000);
 };
 ****/

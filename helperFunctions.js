@@ -1,10 +1,10 @@
 var helperFunctions = function(){
     var stepRange = 1;
-    var fireRange = 5;
+    var fireRange = 3;
     
 
-    var validateMove = function(move, color){
-    
+    var validateMove = function(tiles, move, color){
+
     };
 
 
@@ -80,6 +80,7 @@ var helperFunctions = function(){
                     }
                 }
             }
+
         return tiles;
     };
 
