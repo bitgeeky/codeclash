@@ -34,7 +34,7 @@ function init(){
     });
     board.initialSetup(config);
     setEventHandlers();
-    //setTimeout(function(){playGame();},5000);
+    setTimeout(function(){playGame();},5000);
 };
 
 
@@ -61,14 +61,13 @@ function sendData(client){
     setInterval(function(){
         var boardData = JSON.stringify(board.getTiles());
         client.emit("makeMove", boardData);
-    },1000);
+    },500);
 };
 
 
 /**********************************
 ** MODERATOR - MAKE MOVES
 **********************************/
-/****
 function playGame(){
     var turn = true;
     setInterval(function(){
@@ -78,16 +77,17 @@ function playGame(){
             if(help.validateMove(board.getTiles(), move, "BT")){
                 board.update(help.makeMove(board.getTiles(), move));
             }
+            console.log("Blue");
         }
         else{
             move = redBot.makeMove(board.getTiles(),"RT");
             if(help.validateMove(board.getTiles(), move, "RT")){
                 board.update(help.makeMove(board.getTiles(), move));
             }
+            console.log("Red");
         }
         turn = !turn;
-    },1000);
+    },700);
 };
-****/
 
 init();

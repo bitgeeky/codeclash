@@ -6,35 +6,42 @@ var helperFunctions = function(){
     var validateMove = function(tiles, move, playerTank){
         var initX = move[0],
             initY = move[1];
-        
+        console.log(initX); 
+        console.log(initY);
+        if(initX < 0 || initX >= tiles.length){
+            return false;
+        }
+        if(initY < 0 || initY >= tiles[0].length){
+            return false;
+        }
         if(tiles[initX][initY] != playerTank){
-            return 0;
+            return false;
         }
         if(move[3] == 1){
-            return 1;
+            return true;
         }
         else if(move[3] == 0){
             if(move[2] == 1){
                 if((initX - stepRange) >= 0){
                     var tileCode = tiles[initX-stepRange][initY];
                     if(tileCode == "GR" || tileCode == "FR"){
-                        return 1;
+                        return true;
                     }
                 }
             }
             else if(move[2] == -1){
-                if((initX + stepRange) <= tiles.length){
+                if((initX + stepRange) < tiles.length){
                     var tileCode = tiles[initX+stepRange][initY];
                     if(tileCode == "GR" || tileCode == "FR"){
-                        return 1;
+                        return true;
                     }
                 }
             }
             else if(move[2] == 2){
-                if((initY + stepRange) <= tiles[0].length){
+                if((initY + stepRange) < tiles[0].length){
                     var tileCode = tiles[initX][initY+stepRange];
                     if(tileCode == "GR" || tileCode == "FR"){
-                        return 1;
+                        return true;
                     }
                 }
             }
@@ -42,12 +49,12 @@ var helperFunctions = function(){
                 if((initY - stepRange) >= 0){
                     var tileCode = tiles[initX][initY-stepRange];
                     if(tileCode == "GR" || tileCode == "FR"){
-                        return 1;
+                        return true;
                     }
                 }
             }
         }
-        return 0;
+        return false;
     };
 
     var makeMove = function(tiles, move){
@@ -62,12 +69,12 @@ var helperFunctions = function(){
             {
                 if(move[3] == 0){
                     // Move towards North
-                    tiles[initX][initY+stepRange] = tiles[initX][initY];
+                    tiles[initX-stepRange][initY] = tiles[initX][initY];
                     tiles[initX][initY] = "GR";
                 }
                 else{
                     // Fire towards North
-                    for(var i=0;i<fireRange;i++){
+                    for(var i=1;i<=fireRange;i++){
                         if((initX - i) >= 0){
                             tiles[initX-i][initY] = "FR";
                         }
@@ -78,13 +85,13 @@ var helperFunctions = function(){
             {
                 if(move[3] == 0){
                     // Move towards South
-                    tiles[initX][initY-stepRange] = tiles[initX][initY];
+                    tiles[initX+stepRange][initY] = tiles[initX][initY];
                     tiles[initX][initY] = "GR";
                 }
                 else{
                     // Fire towards South
-                    for(var i=0;i<fireRange;i++){
-                        if((initX + i) <= tiles.length){
+                    for(var i=1;i<=fireRange;i++){
+                        if((initX + i) < tiles.length){
                             tiles[initX+i][initY] = "FR";
                         }
                     }
@@ -94,13 +101,13 @@ var helperFunctions = function(){
             {
                 if(move[3] == 0){
                     // Move towards East
-                    tiles[initX+stepRange][initY] = tiles[initX][initY];
+                    tiles[initX][initY+stepRange] = tiles[initX][initY];
                     tiles[initX][initY] = "GR";
                 }
                 else{
                     // Fire towards East
-                    for(var i=0;i<fireRange;i++){
-                        if((initY + i) <= tiles[0].length){
+                    for(var i=1;i<=fireRange;i++){
+                        if((initY + i) < tiles[0].length){
                             tiles[initX][initY+i] = "FR";
                         }
                     }
@@ -110,12 +117,12 @@ var helperFunctions = function(){
             {
                 if(move[3] == 0){
                     // Move towards West
-                    tiles[initX-stepRange][initY] = tiles[initX][initY];
+                    tiles[initX][initY-stepRange] = tiles[initX][initY];
                     tiles[initX][initY] = "GR";
                 }
                 else{
                     // Fire towards West
-                    for(var i=0;i<fireRange;i++){
+                    for(var i=1;i<=fireRange;i++){
                         if((initY - i) >= 0){
                             tiles[initX][initY-i] = "FR";
                         }

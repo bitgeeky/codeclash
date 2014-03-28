@@ -10,11 +10,21 @@ var bluePlayer = function(){
         // 2:East  -2:West
         // Range of firing is 5 units
         // 3 Bool 0-move and 1-fire
-
-        for(var i=0;i<=tiles.length;i++){
-            for(var j=0;j<=tiles[0].length;j++){
-                if(tiles[i][j] == playerTank)
+        
+        var tiles = tiles;
+        var playerTank = playerTank;
+        var found = 0;
+        for(var i=0;i<tiles.length;i++){
+            for(var j=0;j<tiles[0].length;j++){
+                if(j>=40)
+                    console.log("bug found");
+                if(tiles[i][j] == playerTank){
+                    found = 1;
                     break;
+                }
+            }
+            if(found == 1){
+                break;
             }
         }
         var dirs = [1,-1,2,-2];
