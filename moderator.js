@@ -61,7 +61,7 @@ function sendData(client){
     setInterval(function(){
         var boardData = JSON.stringify(board.getTiles());
         client.emit("makeMove", boardData);
-    },500);
+    },10);
 };
 
 
@@ -87,7 +87,7 @@ function playGame(){
             console.log("Red");
         }
         turn = !turn;
-    },700);
+    },10);
 };
 
 init();

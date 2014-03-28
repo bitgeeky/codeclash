@@ -13,8 +13,10 @@ var redPlayer = function(){
         var tiles = tiles;
         var playerTank = playerTank;
         var found = 0;
-        for(var i=0;i<tiles.length;i++){
-            for(var j=0;j<tiles[0].length;j++){
+        var startI = Math.floor((Math.random()*(tiles.length-1)));
+        var startJ = Math.floor((Math.random()*(tiles[0].length-1)));
+        for(var i=startI;i<tiles.length;i++){
+            for(var j=startJ;j<tiles[0].length;j++){
                 if(j>=40)
                     console.log("bug found");
                 if(tiles[i][j] == playerTank){
@@ -28,7 +30,10 @@ var redPlayer = function(){
         }
         var dirs = [1,-1,2,-2];
         var dir = Math.floor((Math.random()*4)+1) -1;
-        var fire = Math.floor((Math.random()*2)+1) -1;
+        var fire = 0;
+        var count = Math.floor((Math.random()*20)+1);
+        if(count%5 == 0)
+            fire = 1;
         var move = [i, j, dirs[dir], fire];
         return move;
     };
