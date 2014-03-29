@@ -20,7 +20,7 @@ var redPlayer = require("./redPlayer").redPlayer;
 var redBot = new redPlayer();
 var helperFunctions = require("./helperFunctions").helperFunctions;
 var help = new helperFunctions();
-
+var fired = false;
 
 /************************************
 ** MAKE SOCKET CONNECTION
@@ -61,6 +61,10 @@ function sendData(client){
     setInterval(function(){
         var boardData = JSON.stringify(board.getTiles());
         client.emit("makeMove", boardData);
+        if(fired){
+            client.emit("playSound");
+            fired = false;
+        }
     },10);
 };
 
@@ -75,6 +79,9 @@ function playGame(){
         if(turn){
             move = blueBot.makeMove(board.getTiles(),"BT");
             if(help.validateMove(board.getTiles(), move, "BT")){
+                if(move[3] == 1){
+                    fired = true;
+                }
                 board.update(help.makeMove(board.getTiles(), move));
             }
             console.log("Blue");
@@ -82,6 +89,9 @@ function playGame(){
         else{
             move = redBot.makeMove(board.getTiles(),"RT");
             if(help.validateMove(board.getTiles(), move, "RT")){
+                if(move[3] == 1){
+                    fired = true;
+                }
                 board.update(help.makeMove(board.getTiles(), move));
             }
             console.log("Red");

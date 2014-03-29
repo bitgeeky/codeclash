@@ -41,6 +41,8 @@ redassetImage.onload = function(){
     redassetready = true;
 };
 
+var fireSound = new Audio("music/fire.mp3"); 
+
 // Field Division
 var rows = 20,
     columns = 40,
@@ -86,6 +88,7 @@ var setEventHandlers = function(){
     window.addEventListener("resize", onResize, false);
     socket.on("connect", onSocketConnected);
     socket.on("makeMove", onmakeMove);
+    socket.on("playSound", onplaySound);
 };
 function onSocketConnected(){
     console.log("connected");
@@ -95,6 +98,10 @@ function onmakeMove(data){
     var tiles = JSON.parse(data);
     board.update(tiles);
     clientBoard = board.getTiles();
+};
+// Play Firing Sound
+function onplaySound(){
+    fireSound.play();
 };
 // Browser window resize
 function onResize(e){
