@@ -5,6 +5,42 @@ var canvas,
     ctx,
     fieldWidth,
     fieldHeight;
+
+var wallImage = new Image();
+wallImage.src = "images/brick.png";
+var wallready = false;
+wallImage.onload = function(){
+    wallready = true;
+};
+
+var bluebotImage = new Image();
+bluebotImage.src = "images/blue_bot.png";
+var bluebotready = false;
+bluebotImage.onload = function(){
+    bluebotready = true;
+};
+
+var redbotImage = new Image();
+redbotImage.src = "images/red_bot.png";
+var redbotready = false;
+redbotImage.onload = function(){
+    redbotready = true;
+};
+
+var blueassetImage = new Image();
+blueassetImage.src = "images/blue_building.png";
+var blueassetready = false;
+blueassetImage.onload = function(){
+    blueassetready = true;
+};
+
+var redassetImage = new Image();
+redassetImage.src = "images/red_building.png";
+var redassetready = false;
+redassetImage.onload = function(){
+    redassetready = true;
+};
+
 // Field Division
 var rows = 20,
     columns = 40,
@@ -111,30 +147,53 @@ function draw(){
    if(clientBoard){
        for(var x = 0; x < rows; x++) {
        for(var y = 0; y < columns; y++) {
-           if(clientBoard[x][y] == "GR"){
                ctx.fillStyle = '#009900';
-           }
-           else if(clientBoard[x][y] == "FR"){
-               ctx.fillStyle = '#000';
-           }
-           else if(clientBoard[x][y] == "RT"){
-               ctx.fillStyle = '#FF0000';
-           }
-           else if(clientBoard[x][y] == "BT"){
-               ctx.fillStyle = '#0000A0';
-           }
-           else if(clientBoard[x][y] == "RA"){
-               ctx.fillStyle = '#FFA500';
-           }
-           else if(clientBoard[x][y] == "BA"){
-               ctx.fillStyle = '#00FFFF';
-           }
-           else if(clientBoard[x][y] == "WA"){
-               ctx.fillStyle = '#A52A2A';
-           }
            ctx.fillRect(y * tileWidth,
                    x * tileHeight,
                    tileWidth, tileHeight);
+           if(clientBoard[x][y] == "GR"){
+               ctx.fillStyle = '#009900';
+           ctx.fillRect(y * tileWidth,
+                   x * tileHeight,
+                   tileWidth, tileHeight);
+           }
+           else if(clientBoard[x][y] == "FR"){
+           }
+           else if(clientBoard[x][y] == "RT"){
+               if(redbotready){
+               ctx.drawImage(redbotImage, y * tileWidth,
+                   x * tileHeight,
+                   tileWidth, tileHeight);
+               }
+           }
+           else if(clientBoard[x][y] == "BT"){
+               if(bluebotready){
+               ctx.drawImage(bluebotImage, y * tileWidth,
+                   x * tileHeight,
+                   tileWidth, tileHeight);
+               }
+           }
+           else if(clientBoard[x][y] == "RA"){
+               if(redassetready){
+               ctx.drawImage(redassetImage, y * tileWidth,
+                   x * tileHeight,
+                   tileWidth, tileHeight);
+               }
+           }
+           else if(clientBoard[x][y] == "BA"){
+               if(blueassetready){
+               ctx.drawImage(blueassetImage, y * tileWidth,
+                   x * tileHeight,
+                   tileWidth, tileHeight);
+               }
+           }
+           else if(clientBoard[x][y] == "WA"){
+               if(wallready){
+               ctx.drawImage(wallImage, y * tileWidth,
+                   x * tileHeight,
+                   tileWidth, tileHeight);
+               }
+           }
        }
    }
    }
