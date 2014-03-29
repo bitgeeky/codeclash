@@ -70,7 +70,7 @@ function sendData(client){
 **********************************/
 function playGame(){
     var turn = true;
-    setInterval(function(){
+    var gameId = setInterval(function(){
         var move;
         if(turn){
             move = blueBot.makeMove(board.getTiles(),"BT");
@@ -87,6 +87,9 @@ function playGame(){
             console.log("Red");
         }
         turn = !turn;
+        if(help.endGame(board.getTiles())){
+            clearInterval(gameId);
+        }
     },10);
 };
 

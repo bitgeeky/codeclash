@@ -3,6 +3,30 @@ var helperFunctions = function(){
     var stepRange = 1;
     var fireRange = 3;
 
+    var endGame = function(tiles){
+        var tiles = tiles;
+        var bAssets = 0;
+        var bTanks = 0;
+        var rAssets = 0;
+        var rTanks = 0;
+
+        for(var i=0;i<tiles.length;i++){
+            for(var j=0;j<tiles[0].length;j++){
+                if(tiles[i][j] == "BA")
+                    bAssets+=1;
+                else if(tiles[i][j]=="RA")
+                    rAssets+=1;
+                else if(tiles[i][j]=="BT")
+                    bTanks+=1;
+                else if(tiles[i][j]=="RT")
+                    rTanks+=1;
+            }
+        }
+        if(bAssets == 0 || bTanks == 0 || rAssets == 0 || rTanks == 0)
+            return true;
+        return false;
+    };
+
     var validateMove = function(tiles, move, playerTank){
         var initX = move[0],
             initY = move[1];
@@ -135,7 +159,8 @@ var helperFunctions = function(){
 
     return{
         validateMove: validateMove,
-        makeMove: makeMove
+        makeMove: makeMove,
+        endGame: endGame
     }
 };
 exports.helperFunctions = helperFunctions;
