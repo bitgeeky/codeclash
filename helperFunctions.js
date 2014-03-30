@@ -40,6 +40,7 @@ var helperFunctions = function(){
         }
         if(tiles[initX][initY] != playerTank){
             return false;
+            console.log("Invalid Move");
         }
         if(move[3] == 1){
             return true;
