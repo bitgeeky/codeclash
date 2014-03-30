@@ -159,56 +159,115 @@ var redPlayer = function(){
             targetX = secondAssetI;
             targetY = secondAssetJ;
         }
-        if(targetX > tankI){
-            dir = -1;
+        function issafe(checkX, checkY, dir){
+            if(dir == 1){
+                for(var i=1;i<=fireRange+1;i++){
+                    if(checkX - i >= 0){
+                        if(tiles[checkX - i][checkY] == "BT")
+                            return false;
+                    }
+                }
+            }
+            else if(dir == -1){
+                for(var i=1;i<=fireRange+1;i++){
+                    if(checkX + i < tiles.length){
+                        if(tiles[checkX + i][checkY] == "BT")
+                            return false;
+                    }
+                }
+            }
+            else if(dir == 2){
+                for(var j=1;j<=fireRange+1;j++){
+                    if(checkY + j < tiles[0].length){
+                        if(tiles[checkX][checkY + j] == "BT")
+                            return false;
+                    }
+                }
+            }
+            else if(dir == -2){
+                for(var j=1;j<=fireRange+1;j++){
+                    if(checkY - j >= 0){
+                        if(tiles[checkX][checkY - j] == "BT")
+                            return false;
+                    }
+                }
+            }
+            return true;
         }
-        else if(targetX < tankI){
-            dir = 1;
+        var isRandom = true;
+        /*
+        if(tankI < targetX){
+            if(issafe(tankI,tankJ,-1))
+                dir = -1;
+            else{
+                if(tankJ < targetY){
+                    if(issafe(tankI,tankJ,2)){
+                        dir = 2;
+                    }
+                    else 
+                        dir = -2;
+                }
+            }
         }
-        else{
-        if(targetY > tankJ){
-            dir = 2;
+        else if(tankI > targetX){
+            if(issafe(tankI,tankJ,1))
+                dir = 1;
+            else{
+                if(tankJ < targetY){
+                    if(issafe(tankI,tankJ,2)){
+                        dir = 2;
+                    }
+                    else 
+                        dir = -2;
+                }
+
+            }
         }
-        else if(targetX < tankI){
-            dir = -2;
-        }
-        else{
+        */
+        if(isRandom){
             dirs = [1,-1,2,-2];
             var turn = Math.floor((Math.random()*4)+1) - 1;
             dir = dirs[turn];
-        }
+            while(!issafe(tankI,tankJ,dir)){
+                turn = Math.floor((Math.random()*4)+1) - 1;
+                dir = dirs[turn];
+            }
         }
         // Fire Wall if blocks Path
         if(dir == 1){
             if(tankI - stepRange >= 0){
                 if(tiles[tankI-stepRange][tankJ] == "WA")
                     fire = 1;
-                if(tiles[tankI-stepRange][tankJ] == playerTank)
+                if(tiles[tankI-stepRange][tankJ] == playerTank){
                     tankI-=stepRange;
+                }
             }
         }
         else if(dir == -1){
             if(tankI + stepRange < tiles.length){
                 if(tiles[tankI + stepRange][tankJ] == "WA")
                     fire = 1;
-                if(tiles[tankI + stepRange][tankJ] == playerTank)
+                if(tiles[tankI + stepRange][tankJ] == playerTank){
                     tankI+=stepRange;
+                }
             }
         }
         else if(dir == 2){
             if(tankJ + stepRange < tiles[0].length){
                 if(tiles[tankI][tankJ + stepRange] == "WA")
                     fire = 1;
-                if(tiles[tankI][tankJ + stepRange] == playerTank)
+                if(tiles[tankI][tankJ + stepRange] == playerTank){
                     tankJ+=stepRange;
+                }
             }
         }
         else if(dir == -2){
             if(tankJ - stepRange >= 0){
                 if(tiles[tankI][tankJ - stepRange] == "WA")
                     fire = 1;
-                if(tiles[tankI][tankJ - stepRange] == playerTank)
+                if(tiles[tankI][tankJ - stepRange] == playerTank){
                     tankJ-=stepRange;
+                }
             }
         }
         // Check to Fire
