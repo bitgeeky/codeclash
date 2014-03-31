@@ -41,6 +41,13 @@ redassetImage.onload = function(){
     redassetready = true;
 };
 
+var firedregionImage = new Image();
+firedregionImage.src = "images/fired.png";
+var firedregionready = false;
+firedregionImage.onload = function(){
+    firedregionready = true;
+};
+
 var fireSound = new Audio("music/fire.mp3"); 
 
 // Field Division
@@ -165,6 +172,11 @@ function draw(){
                    tileWidth, tileHeight);
            }
            else if(clientBoard[x][y] == "FR"){
+               if(firedregionready){
+               ctx.drawImage(firedregionImage, y * tileWidth,
+                   x * tileHeight,
+                   tileWidth, tileHeight);
+               }
            }
            else if(clientBoard[x][y] == "RT"){
                if(redbotready){

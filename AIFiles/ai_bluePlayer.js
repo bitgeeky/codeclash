@@ -1,4 +1,4 @@
-var redPlayer = function(){
+var bluePlayer = function(){
     
     var makeMove = function(tiles, playerTank){
 
@@ -23,12 +23,12 @@ var redPlayer = function(){
         var dir = 0;
         for(var i=0;i<tiles.length;i++){
             for(var j=0;j<tiles[0].length;j++){
-                if(tiles[i][j] == "RT"){
+                if(tiles[i][j] == "BT"){
         if(fire == 0){
             // Check North
             for(var x=1;x<=fireRange;x++){
                 if(i-x >= 0){
-                    if(tiles[i-x][j] == "BT" || tiles[i-x][j] == "BA" ){
+                    if(tiles[i-x][j] == "RT" || tiles[i-x][j] == "RA" ){
                         fire = 1;
                         dir = 1;
                     }
@@ -39,7 +39,7 @@ var redPlayer = function(){
             // Check South
             for(var x=1;x<=fireRange;x++){
                 if(i+x < tiles.length){
-                    if(tiles[i+x][j] == "BT" || tiles[i+x][j] == "BA" ){
+                    if(tiles[i+x][j] == "RT" || tiles[i+x][j] == "RA" ){
                         fire = 1;
                         dir = -1;
                     }
@@ -50,7 +50,7 @@ var redPlayer = function(){
             // Check East
             for(var y=1;y<=fireRange;y++){
                 if(j+y < tiles[0].length){
-                    if(tiles[i][j+y] == "BT" || tiles[i][j+y] == "BA" ){
+                    if(tiles[i][j+y] == "RT" || tiles[i][j+y] == "RA" ){
                         fire = 1;
                         dir = 2;
                     }
@@ -61,7 +61,7 @@ var redPlayer = function(){
             // Check West
             for(var y=1;y<=fireRange;y++){
                 if(j-y >= 0){
-                    if(tiles[i][j-y] == "BT" || tiles[i][j-y] == "BA" ){
+                    if(tiles[i][j-y] == "RT" || tiles[i][j-y] == "RA" ){
                         fire = 1;
                         dir = -2;
                     }
@@ -119,7 +119,7 @@ var redPlayer = function(){
         // Select Assets to be Fired
         for(var i=0;i<tiles.length;i++){
             for(var j=0;j<tiles[0].length;j++){
-                if(tiles[i][j] == "BA"){
+                if(tiles[i][j] == "RA"){
                     firstAssetI = i;
                     firstAssetJ = j;
                     assetFound = true;
@@ -132,7 +132,7 @@ var redPlayer = function(){
         assetFound = false;
         for(var i=tiles.length-1;i>=0;i--){
             for(var j=tiles[0].length-1;j>=0;j--){
-                if(tiles[i][j] == "BA"){
+                if(tiles[i][j] == "RA"){
                     secondAssetI = i;
                     secondAssetJ = j;
                     assetFound = true;
@@ -163,7 +163,7 @@ var redPlayer = function(){
             if(dir == 1){
                 for(var i=1;i<=fireRange+1;i++){
                     if(checkX - i >= 0){
-                        if(tiles[checkX - i][checkY] == "BT")
+                        if(tiles[checkX - i][checkY] == "RT")
                             return false;
                     }
                 }
@@ -171,7 +171,7 @@ var redPlayer = function(){
             else if(dir == -1){
                 for(var i=1;i<=fireRange+1;i++){
                     if(checkX + i < tiles.length){
-                        if(tiles[checkX + i][checkY] == "BT")
+                        if(tiles[checkX + i][checkY] == "RT")
                             return false;
                     }
                 }
@@ -179,7 +179,7 @@ var redPlayer = function(){
             else if(dir == 2){
                 for(var j=1;j<=fireRange+1;j++){
                     if(checkY + j < tiles[0].length){
-                        if(tiles[checkX][checkY + j] == "BT")
+                        if(tiles[checkX][checkY + j] == "RT")
                             return false;
                     }
                 }
@@ -187,7 +187,7 @@ var redPlayer = function(){
             else if(dir == -2){
                 for(var j=1;j<=fireRange+1;j++){
                     if(checkY - j >= 0){
-                        if(tiles[checkX][checkY - j] == "BT")
+                        if(tiles[checkX][checkY - j] == "RT")
                             return false;
                     }
                 }
@@ -227,9 +227,9 @@ var redPlayer = function(){
         var assetI,
             assetJ;
         var aFound = false;
-        for(var i=tiles.length-1;i>=0;i--){
-            for(var j=tiles[0].length;j>=0;j--){
-                if(tiles[i][j] == "BA"){
+        for(var i=0;i<tiles.length;i++){
+            for(var j=0;j<tiles[0].length;j++){
+                if(tiles[i][j] == "RA"){
                    assetI = i;
                    assetJ = j;
                    aFound = true;
@@ -245,18 +245,16 @@ var redPlayer = function(){
                     isRandom = false;
                     dir = 2;
                 }
+            }
+        }
         if((tankJ > assetJ) && isRandom){
             if(tankJ - stepRange >= 0){
                 if(issafe(tankI,tankJ,-2) && (tiles[tankI][tankJ-stepRange] == "GR")){
                     isRandom = false;
                     dir = -2;
                 }
-        if((tankI > assetI) && isRandom){
-            if(tankI - stepRange >= 0){
-                if(issafe(tankI,tankJ,1) && (tiles[tankI - stepRange][tankJ] == "GR")){
-                    isRandom = false;
-                    dir = 1;
-                }
+            }
+        }
         if((tankI < assetI) && isRandom){
             if(tankI + stepRange < tiles.length){
                 if(issafe(tankI,tankJ,-1) && (tiles[tankI + stepRange][tankJ] == "GR")){
@@ -265,10 +263,12 @@ var redPlayer = function(){
                 }
             }
         }
-            }
-        }
-            }
-        }
+        if((tankI > assetI) && isRandom){
+            if(tankI - stepRange >= 0){
+                if(issafe(tankI,tankJ,1) && (tiles[tankI - stepRange][tankJ] == "GR")){
+                    isRandom = false;
+                    dir = 1;
+                }
             }
         }
         if(isRandom){
@@ -326,4 +326,4 @@ var redPlayer = function(){
         makeMove: makeMove
     }
 };
-exports.redPlayer = redPlayer;
+exports.bluePlayer = bluePlayer;

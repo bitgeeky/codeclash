@@ -13,7 +13,8 @@ var socket;
 var Board = require("./Board").Board;
 var board = new Board(20, 40);
 var ConfOne = require("./ConfOne").ConfOne;
-var config = new ConfOne(20, 40);
+var ConfTwo = require("./ConfTwo").ConfTwo;
+var config = new ConfTwo(20, 40);
 var bluePlayer = require("./bluePlayer").bluePlayer;
 var blueBot = new bluePlayer();
 var redPlayer = require("./redPlayer").redPlayer;
@@ -73,7 +74,7 @@ function sendData(client){
 ** MODERATOR - MAKE MOVES
 **********************************/
 function playGame(){
-    var turn = false;
+    var turn = true;
     var gameId = setInterval(function(){
         var move;
         if(turn){
@@ -100,7 +101,7 @@ function playGame(){
         if(help.endGame(board.getTiles())){
             clearInterval(gameId);
         }
-    },10);
+    },50);
 };
 
 init();
