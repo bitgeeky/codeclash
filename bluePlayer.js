@@ -224,6 +224,53 @@ var bluePlayer = function(){
             }
         }
         */
+        var assetI,
+            assetJ;
+        var aFound = false;
+        for(var i=0;i<tiles.length;i++){
+            for(var j=0;j<tiles[0].length;j++){
+                if(tiles[i][j] == "RA"){
+                   assetI = i;
+                   assetJ = j;
+                   aFound = true;
+                   break;
+                }
+                if(aFound)
+                    break;
+            }
+        }
+        if((tankI < assetI) && isRandom){
+            if(tankI + stepRange < tiles.length){
+                if(issafe(tankI,tankJ,-1) && (tiles[tankI + stepRange][tankJ] == "GR")){
+                    isRandom = false;
+                    dir = -1;
+                }
+            }
+        }
+        if((tankI > assetI) && isRandom){
+            if(tankI - stepRange >= 0){
+                if(issafe(tankI,tankJ,1) && (tiles[tankI - stepRange][tankJ] == "GR")){
+                    isRandom = false;
+                    dir = 1;
+                }
+            }
+        }
+        if((tankJ < assetJ) && isRandom){
+            if(tankJ + stepRange < tiles[0].length){
+                if(issafe(tankI,tankJ,2) && (tiles[tankI][tankJ+stepRange] == "GR")){
+                    isRandom = false;
+                    dir = 2;
+                }
+            }
+        }
+        if((tankJ > assetJ) && isRandom){
+            if(tankJ - stepRange >= 0){
+                if(issafe(tankI,tankJ,-2) && (tiles[tankI][tankJ-stepRange] == "GR")){
+                    isRandom = false;
+                    dir = -2;
+                }
+            }
+        }
         if(isRandom){
             dirs = [1,-1,2,-2];
             var turn = Math.floor((Math.random()*4)+1) - 1;

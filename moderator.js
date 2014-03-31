@@ -100,7 +100,7 @@ function playGame(){
         if(help.endGame(board.getTiles())){
             clearInterval(gameId);
         }
-    },10);
+    },30);
 };
 
 init();
