@@ -73,7 +73,7 @@ function sendData(client){
 ** MODERATOR - MAKE MOVES
 **********************************/
 function playGame(){
-    var turn = true;
+    var turn = false;
     var gameId = setInterval(function(){
         var move;
         if(turn){
@@ -100,7 +100,7 @@ function playGame(){
         if(help.endGame(board.getTiles())){
             clearInterval(gameId);
         }
-    },30);
+    },10);
 };
 
 init();

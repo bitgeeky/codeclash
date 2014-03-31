@@ -227,8 +227,8 @@ var redPlayer = function(){
         var assetI,
             assetJ;
         var aFound = false;
-        for(var i=0;i<tiles.length;i++){
-            for(var j=0;j<tiles[0].length;j++){
+        for(var i=tiles.length-1;i>=0;i--){
+            for(var j=tiles[0].length;j>=0;j--){
                 if(tiles[i][j] == "BA"){
                    assetI = i;
                    assetJ = j;
@@ -239,6 +239,24 @@ var redPlayer = function(){
                     break;
             }
         }
+        if((tankJ < assetJ) && isRandom){
+            if(tankJ + stepRange < tiles[0].length){
+                if(issafe(tankI,tankJ,2) && (tiles[tankI][tankJ+stepRange] == "GR")){
+                    isRandom = false;
+                    dir = 2;
+                }
+        if((tankJ > assetJ) && isRandom){
+            if(tankJ - stepRange >= 0){
+                if(issafe(tankI,tankJ,-2) && (tiles[tankI][tankJ-stepRange] == "GR")){
+                    isRandom = false;
+                    dir = -2;
+                }
+        if((tankI > assetI) && isRandom){
+            if(tankI - stepRange >= 0){
+                if(issafe(tankI,tankJ,1) && (tiles[tankI - stepRange][tankJ] == "GR")){
+                    isRandom = false;
+                    dir = 1;
+                }
         if((tankI < assetI) && isRandom){
             if(tankI + stepRange < tiles.length){
                 if(issafe(tankI,tankJ,-1) && (tiles[tankI + stepRange][tankJ] == "GR")){
@@ -247,28 +265,10 @@ var redPlayer = function(){
                 }
             }
         }
-        if((tankI > assetI) && isRandom){
-            if(tankI - stepRange >= 0){
-                if(issafe(tankI,tankJ,1) && (tiles[tankI - stepRange][tankJ] == "GR")){
-                    isRandom = false;
-                    dir = 1;
-                }
             }
         }
-        if((tankJ < assetJ) && isRandom){
-            if(tankJ + stepRange < tiles[0].length){
-                if(issafe(tankI,tankJ,2) && (tiles[tankI][tankJ+stepRange] == "GR")){
-                    isRandom = false;
-                    dir = 2;
-                }
             }
         }
-        if((tankJ > assetJ) && isRandom){
-            if(tankJ - stepRange >= 0){
-                if(issafe(tankI,tankJ,-2) && (tiles[tankI][tankJ-stepRange] == "GR")){
-                    isRandom = false;
-                    dir = -2;
-                }
             }
         }
         if(isRandom){

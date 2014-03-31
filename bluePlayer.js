@@ -239,22 +239,6 @@ var bluePlayer = function(){
                     break;
             }
         }
-        if((tankI < assetI) && isRandom){
-            if(tankI + stepRange < tiles.length){
-                if(issafe(tankI,tankJ,-1) && (tiles[tankI + stepRange][tankJ] == "GR")){
-                    isRandom = false;
-                    dir = -1;
-                }
-            }
-        }
-        if((tankI > assetI) && isRandom){
-            if(tankI - stepRange >= 0){
-                if(issafe(tankI,tankJ,1) && (tiles[tankI - stepRange][tankJ] == "GR")){
-                    isRandom = false;
-                    dir = 1;
-                }
-            }
-        }
         if((tankJ < assetJ) && isRandom){
             if(tankJ + stepRange < tiles[0].length){
                 if(issafe(tankI,tankJ,2) && (tiles[tankI][tankJ+stepRange] == "GR")){
@@ -268,6 +252,22 @@ var bluePlayer = function(){
                 if(issafe(tankI,tankJ,-2) && (tiles[tankI][tankJ-stepRange] == "GR")){
                     isRandom = false;
                     dir = -2;
+                }
+            }
+        }
+        if((tankI < assetI) && isRandom){
+            if(tankI + stepRange < tiles.length){
+                if(issafe(tankI,tankJ,-1) && (tiles[tankI + stepRange][tankJ] == "GR")){
+                    isRandom = false;
+                    dir = -1;
+                }
+            }
+        }
+        if((tankI > assetI) && isRandom){
+            if(tankI - stepRange >= 0){
+                if(issafe(tankI,tankJ,1) && (tiles[tankI - stepRange][tankJ] == "GR")){
+                    isRandom = false;
+                    dir = 1;
                 }
             }
         }
