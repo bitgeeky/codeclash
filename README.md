@@ -25,8 +25,14 @@ Scoring
 
 Input
 -----
-
+A 2-D matrix showing the Field state at current time.
 Output
 ------
+A linear array returning 4 variables
+1 The X and Y coordinates of Player psition
+2 Direction of Move/Fire
+3 Boolean Variable
+    For Firing - 1
+    For Moving - 0
 
 
